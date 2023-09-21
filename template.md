@@ -29,16 +29,26 @@ airports during January 2013.
 data("early_january_weather")
 ```
 
-The dataset contains 358 observations and 15 variables. Variables
+The data set contains 358 observations and 15 variables. Variables
 include origin, year, month, day, hour, temp, dewp, humid, wind_dir,
-wind_speed, wind_gust, precip, pressure, visib, time_hour.
+wind_speed, wind_gust, precip, pressure, visib, time_hour .
+
+Next, we will examine some key variables.
+
+``` r
+temp_vec <- pull(early_january_weather, temp)
+wind_speed_vec <- pull(early_january_weather, wind_speed)
+visib_vec <- pull(early_january_weather, visib)
+```
 
 The average temperature was 39.6 degrees F with a standard deviation of
-7.1 degrees F. The minimum and maximum temperatures were 24.1 and 57.9
-degrees F, respectively.
+7.1degrees F. The minimum and maximum temperatures were 24.1and 57.9,
+respectively.
 
 Some additional values of note include average wind speed at 8.2 mph,
 and average visibility at 8.5 miles.
+
+## Time for plotting!
 
 ``` r
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
@@ -46,7 +56,13 @@ ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
   labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
 ```
 
-![](template_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](template_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+ggsave("scatterplot.pdf")
+```
+
+    ## Saving 7 x 5 in image
 
 Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular
 fluctuations in temperature occurred, an overall increase in temperature
@@ -64,4 +80,4 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is -0.1583531.
+I can take the mean of the sample, too! The mean is 0.1219692.

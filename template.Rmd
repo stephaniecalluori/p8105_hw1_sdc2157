@@ -16,20 +16,31 @@ For this exercise, we will be examining the early_january_weather dataset, which
 
 ```{r}
 data("early_january_weather")
+
 ```
 
-The  dataset contains `r nrow(early_january_weather)` observations and `r ncol(early_january_weather)` variables. Variables include `r colnames(early_january_weather)`. 
+The data set contains `r nrow(early_january_weather)` observations and `r ncol(early_january_weather)` variables. Variables include `r colnames(early_january_weather)` . 
 
-The average temperature was `r round(mean(pull(early_january_weather, var = temp)), digits = 1)` degrees F with a standard deviation of `r round(sd(pull(early_january_weather, var = temp)), digits = 1)` degrees F. The minimum and maximum temperatures were `r round(min(pull(early_january_weather, var = temp)), digits = 1)` and `r round(max(pull(early_january_weather, var = temp)), digits = 1)` degrees F, respectively.
+Next, we will examine some key variables.
 
-Some additional values of note include average wind speed at `r round(mean(pull(early_january_weather, var = wind_speed)), digits = 1)` mph, and average visibility  at `r round(mean(pull(early_january_weather, var = visib)), digits = 1)` miles.
+```{r}
+temp_vec <- pull(early_january_weather, temp)
+wind_speed_vec <- pull(early_january_weather, wind_speed)
+visib_vec <- pull(early_january_weather, visib)
+```
 
+The average temperature was `r round(mean(temp_vec), digits = 1)` degrees F with a standard deviation of `r round(sd(temp_vec), digits = 1)`degrees F. The minimum and maximum temperatures were `r round(min(temp_vec), digits = 1)`and `r round(max(temp_vec), digits = 1)`, respectively. 
+
+Some additional values of note include average wind speed at `r round(mean(wind_speed_vec), digits = 1)` mph, and average visibility at `r round(mean(visib_vec), digits = 1)` miles.
+
+## Time for plotting!
 
 ```{r}
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point() +
   labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
 
+ggsave("scatterplot.pdf")
 ```
 
 Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular fluctuations in temperature occurred, an overall increase in temperature was observed from early to mid-January. Relative humidity was low, and then considerably increased near mid-January. 
