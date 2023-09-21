@@ -5,9 +5,19 @@ date: 2023-09-23
 output: github_document
 ---
 
-I'm an R Markdown document! 
+```{r}
+library(moderndive)
+library(tidyverse)
+```
 
-# Section 1
+# Problem 1
+
+For this exercise, we will be examining the early_january_weather dataset.
+
+```{r}
+data("early_january_weather")
+```
+
 
 Here's a **code chunk** that samples from 
 a _normal distribution_:
