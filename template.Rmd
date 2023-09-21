@@ -26,7 +26,7 @@ Some additional values of note include average wind speed at `r round(mean(pull(
 
 
 ```{r}
-temp_hour_humid <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
+ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point() +
   labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
 

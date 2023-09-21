@@ -41,10 +41,12 @@ Some additional values of note include average wind speed at 8.2 mph,
 and average visibility at 8.5 miles.
 
 ``` r
-temp_hour_humid <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
+ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point() +
   labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
 ```
+
+![](template_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular
 fluctuations in temperature occurred, an overall increase in temperature
@@ -62,4 +64,4 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is -0.0830322.
+I can take the mean of the sample, too! The mean is -0.1583531.
