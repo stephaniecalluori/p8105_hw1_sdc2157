@@ -22,11 +22,23 @@ library(tidyverse)
 # Problem 1
 
 For this exercise, we will be examining the early_january_weather
-dataset.
+dataset, which catalogs hourly weather data for LGA, JFK, and EWR
+airports during January 2013.
 
 ``` r
 data("early_january_weather")
 ```
+
+The dataset contains 358 observations and 15 variables. Variables
+include origin, year, month, day, hour, temp, dewp, humid, wind_dir,
+wind_speed, wind_gust, precip, pressure, visib, time_hour.
+
+The average temperature was 39.6 degrees F with a standard deviation of
+7.1 degrees F. The minimum and maximum temperatures were 24.1 and 57.9
+degrees F, respectively.
+
+Some additional values of note include average wind speed at 8.2 mph,
+and average visibility at 8.5 miles.
 
 Here’s a **code chunk** that samples from a *normal distribution*:
 
@@ -39,4 +51,4 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is 0.1209768.
+I can take the mean of the sample, too! The mean is 0.0059338.

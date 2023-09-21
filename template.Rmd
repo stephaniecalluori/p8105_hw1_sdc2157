@@ -12,11 +12,17 @@ library(tidyverse)
 
 # Problem 1
 
-For this exercise, we will be examining the early_january_weather dataset.
+For this exercise, we will be examining the early_january_weather dataset, which catalogs hourly weather data for LGA, JFK, and EWR airports during January 2013. 
 
 ```{r}
 data("early_january_weather")
 ```
+
+The  dataset contains `r nrow(early_january_weather)` observations and `r ncol(early_january_weather)` variables. Variables include `r colnames(early_january_weather)`. 
+
+The average temperature was `r round(mean(pull(early_january_weather, var = temp)), digits = 1)` degrees F with a standard deviation of `r round(sd(pull(early_january_weather, var = temp)), digits = 1)` degrees F. The minimum and maximum temperatures were `r round(min(pull(early_january_weather, var = temp)), digits = 1)` and `r round(max(pull(early_january_weather, var = temp)), digits = 1)` degrees F, respectively.
+
+Some additional values of note include average wind speed at `r round(mean(pull(early_january_weather, var = wind_speed)), digits = 1)` mph, and average visibility  at `r round(mean(pull(early_january_weather, var = visib)), digits = 1)` miles.
 
 
 Here's a **code chunk** that samples from 
