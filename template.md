@@ -40,6 +40,17 @@ degrees F, respectively.
 Some additional values of note include average wind speed at 8.2 mph,
 and average visibility at 8.5 miles.
 
+``` r
+temp_hour_humid <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
+  geom_point() +
+  labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
+```
+
+Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular
+fluctuations in temperature occurred, an overall increase in temperature
+was observed from early to mid-January. Relative humidity was low, and
+then considerably increased near mid-January.
+
 Here’s a **code chunk** that samples from a *normal distribution*:
 
 ``` r
@@ -51,4 +62,4 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is 0.0059338.
+I can take the mean of the sample, too! The mean is -0.0830322.
