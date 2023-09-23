@@ -25,7 +25,9 @@ The data set contains `r nrow(early_january_weather)` observations and `r ncol(e
 
 ```{r, pull_variables, echo = FALSE}
 temp_vec <- pull(early_january_weather, temp)
+
 wind_speed_vec <- pull(early_january_weather, wind_speed)
+
 visib_vec <- pull(early_january_weather, visib)
 ```
 
@@ -74,15 +76,19 @@ We will attempt to take the mean of each variable in our data frame.
 n_avg <- mean(
   pull(example_df, vec_num)
   )
+
 log_avg <- mean(
   pull(example_df, vec_logical)
   )
+
 char_avg <- mean(
   pull(example_df, vec_char)
   )
+
 fac_avg <- mean(
   pull(example_df, vec_factor)
   )
+
 ```
 
 Notice the warning messages that appear. You can only take the mean of numeric and logical variables. 
@@ -97,9 +103,11 @@ We can convert non-numeric variables to numeric variables.
 vec_log_num <- as.numeric(
   pull(example_df, vec_logical)
   )
+
 vec_char_num <- as.numeric(
   pull(example_df, vec_char)
   )
+
 vec_factor_num <- as.numeric(
   pull(example_df, vec_factor)
   )
@@ -114,7 +122,9 @@ Now, let's try to take the mean of each of our converted variables.
 
 ```{r, mean_converted}
 mean(vec_log_num)
+
 mean(vec_char_num)
+
 mean(vec_factor_num)
 
 ```

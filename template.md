@@ -78,9 +78,11 @@ We will attempt to take the mean of each variable in our data frame.
 n_avg <- mean(
   pull(example_df, vec_num)
   )
+
 log_avg <- mean(
   pull(example_df, vec_logical)
   )
+
 char_avg <- mean(
   pull(example_df, vec_char)
   )
@@ -117,9 +119,11 @@ We can convert non-numeric variables to numeric variables.
 vec_log_num <- as.numeric(
   pull(example_df, vec_logical)
   )
+
 vec_char_num <- as.numeric(
   pull(example_df, vec_char)
   )
+
 vec_factor_num <- as.numeric(
   pull(example_df, vec_factor)
   )
