@@ -8,6 +8,7 @@ output: github_document
 ```{r, load_packages, message = FALSE}
 library(moderndive)
 library(tidyverse)
+
 ```
 
 # Problem 1
@@ -29,6 +30,7 @@ temp_vec <- pull(early_january_weather, temp)
 wind_speed_vec <- pull(early_january_weather, wind_speed)
 
 visib_vec <- pull(early_january_weather, visib)
+
 ```
 
 The average temperature was `r round(mean(temp_vec), digits = 1)` degrees F with a standard deviation of `r round(sd(temp_vec), digits = 1)` degrees F. The minimum and maximum temperatures were `r round(min(temp_vec), digits = 1)` and `r round(max(temp_vec), digits = 1)` degrees F, respectively. 
@@ -45,6 +47,7 @@ ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
        title = "Hourly Temperature and Humidity during Jan 2013")
 
 ggsave("scatterplot.pdf")
+
 ```
 
 Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular fluctuations in temperature occurred, an overall increase in temperature was observed from early to mid-January. Relative humidity was low, then considerably increased near mid-January. 
@@ -68,6 +71,7 @@ example_df <-
                         levels = c("small", "medium", "large")
                         )
   )
+
 ```
 
 We will attempt to take the mean of each variable in our data frame.
