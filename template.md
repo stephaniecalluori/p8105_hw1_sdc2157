@@ -69,6 +69,25 @@ fluctuations in temperature occurred, an overall increase in temperature
 was observed from early to mid-January. Relative humidity was low, and
 then considerably increased near mid-January.
 
+# Problem 2
+
+Next, we will explore variable types. First, we will create a dataframe.
+
+``` r
+set.seed(10)
+
+example_df <-
+  tibble(
+    vec_num = rnorm(10),
+    vec_logical = (vec_num > 0),
+    vec_char = 1:10,
+    vec_factor = factor(c("small", "small", "medium", "large", "medium", "large", 
+                          "small", "large", "large", "large"),
+                        levels = c("small", "medium", "large")
+                        )
+  )
+```
+
 Here’s a **code chunk** that samples from a *normal distribution*:
 
 ``` r
@@ -80,4 +99,4 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is 0.1219692.
+I can take the mean of the sample, too! The mean is -0.0833011.
