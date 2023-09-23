@@ -5,12 +5,14 @@ date: 2023-09-23
 output: github_document
 ---
 
-```{r}
+```{r, message = FALSE}
 library(moderndive)
 library(tidyverse)
 ```
 
 # Problem 1
+
+## Describing our data
 
 For this exercise, we will be examining the early_january_weather dataset, which catalogs hourly weather data for LGA, JFK, and EWR airports during January 2013. 
 
@@ -21,21 +23,19 @@ data("early_january_weather")
 
 The data set contains `r nrow(early_january_weather)` observations and `r ncol(early_january_weather)` variables. Variables include `r colnames(early_january_weather)` . 
 
-Next, we will examine some key variables.
-
-```{r}
+```{r, echo = FALSE}
 temp_vec <- pull(early_january_weather, temp)
 wind_speed_vec <- pull(early_january_weather, wind_speed)
 visib_vec <- pull(early_january_weather, visib)
 ```
 
-The average temperature was `r round(mean(temp_vec), digits = 1)` degrees F with a standard deviation of `r round(sd(temp_vec), digits = 1)`degrees F. The minimum and maximum temperatures were `r round(min(temp_vec), digits = 1)`and `r round(max(temp_vec), digits = 1)`, respectively. 
+The average temperature was `r round(mean(temp_vec), digits = 1)` degrees F with a standard deviation of `r round(sd(temp_vec), digits = 1)`degrees F. The minimum and maximum temperatures were `r round(min(temp_vec), digits = 1)` and `r round(max(temp_vec), digits = 1)`, respectively. 
 
 Some additional values of note include average wind speed at `r round(mean(wind_speed_vec), digits = 1)` mph, and average visibility at `r round(mean(visib_vec), digits = 1)` miles.
 
 ## Time for plotting!
 
-```{r}
+```{r, message = FALSE}
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point() +
   labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
@@ -47,7 +47,9 @@ Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular fluctua
 
 # Problem 2
 
-Next, we will explore variable types. First, we will create a dataframe. 
+## Exploring and Converting Variable Types
+
+First, we will create a data frame. 
 
 ```{r}
 set.seed(10)
@@ -56,7 +58,7 @@ example_df <-
   tibble(
     vec_num = rnorm(10),
     vec_logical = (vec_num > 0),
-    vec_char = 1:10,
+    vec_char = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
     vec_factor = factor(c("small", "small", "medium", "large", "medium", "large", 
                           "small", "large", "large", "large"),
                         levels = c("small", "medium", "large")
@@ -64,16 +66,39 @@ example_df <-
   )
 ```
 
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+We will attempt to take the mean of each variable in our data frame.
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+n_avg <- mean(pull(example_df, vec_num))
+log_avg <- mean(pull(example_df, vec_logical))
+char_avg <- mean(pull(example_df, vec_char))
+fac_avg <- mean(pull(example_df, vec_factor))
 ```
 
-# Section 2
+Notice the warning messages that appear. You can only take the mean of numeric and logical variables. 
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+The mean of the numeric variable `vec_num` outputs `r n_avg`, representing the arithmetic mean. The mean of the logical variable `vec_logical` outputs `r log_avg`, representing the average number of `TRUE` values (under the hood, `TRUE == 1`). The mean of the character variable `vec_char` and the factor variable `vec_factor` output `r char_avg` and `r fac_avg`, respectively.
+
+We can convert non-numeric variables to numeric variables. 
+
+```{r, warning = FALSE}
+vec_log_num <- as.numeric(pull(example_df, vec_logical))
+vec_char_num <- as.numeric(pull(example_df, vec_char))
+vec_factor_num <- as.numeric(pull(example_df, vec_factor))
+
+```
+
+* Converting Logical to Numeric: Explicitly converts `TRUE` to 1 and `FALSE` to 0. 
+* Converting Character to Numeric: Each character value is converted to `NA`. 
+* Converting Factor to Numeric: Each factor value is converted to either 1, 2, or 3, which represents the three factor levels we previously defined.
+
+Now, we can take the mean of each of our converted variables.
+
+```{r}
+mean(vec_log_num)
+mean(vec_char_num)
+mean(vec_factor_num)
+
+```
+
+As previously described, the output for the mean `vec_log_num` represents the average number of `TRUE` values. Output for `vec_char_num` remains `NA` as there are no numerical values that correspond to the NA values. Output for the mean of `vec_factor_num` now represents the average value of the factor levels.
