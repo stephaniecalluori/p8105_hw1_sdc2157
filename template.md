@@ -12,9 +12,8 @@ library(tidyverse)
 
 ## Describing our data
 
-For this exercise, we will be examining the early_january_weather
-dataset, which catalogs hourly weather data for LGA, JFK, and EWR
-airports during January 2013.
+We will examine the early_january_weather dataset, which catalogs hourly
+weather data for LGA, JFK, and EWR airports during January 2013.
 
 ``` r
 data("early_january_weather")
@@ -25,8 +24,8 @@ include origin, year, month, day, hour, temp, dewp, humid, wind_dir,
 wind_speed, wind_gust, precip, pressure, visib, time_hour .
 
 The average temperature was 39.6 degrees F with a standard deviation of
-7.1degrees F. The minimum and maximum temperatures were 24.1 and 57.9,
-respectively.
+7.1 degrees F. The minimum and maximum temperatures were 24.1 and 57.9
+degrees F, respectively.
 
 Some additional values of note include average wind speed at 8.2 mph,
 and average visibility at 8.5 miles.
@@ -36,10 +35,12 @@ and average visibility at 8.5 miles.
 ``` r
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point() +
-  labs(y = "Temp (F)" , x = "Hourly Time of Recording", title = "Hourly Temperature and Humidity during Jan 2013")
+  labs(y = "Temperature (F)", 
+       x = "Time of Recording (Hourly)", 
+       title = "Hourly Temperature and Humidity during Jan 2013")
 ```
 
-![](template_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](template_files/figure-gfm/scatterplot-1.png)<!-- -->
 
 ``` r
 ggsave("scatterplot.pdf")
@@ -47,12 +48,12 @@ ggsave("scatterplot.pdf")
 
 Figure 1: Hourly Temperature and Humidity during Jan 2013. While regular
 fluctuations in temperature occurred, an overall increase in temperature
-was observed from early to mid-January. Relative humidity was low, and
-then considerably increased near mid-January.
+was observed from early to mid-January. Relative humidity was low, then
+considerably increased near mid-January.
 
 # Problem 2
 
-## Exploring and Converting Variable Types
+## Exploring Variable Types
 
 First, we will create a data frame.
 
@@ -74,16 +75,24 @@ example_df <-
 We will attempt to take the mean of each variable in our data frame.
 
 ``` r
-n_avg <- mean(pull(example_df, vec_num))
-log_avg <- mean(pull(example_df, vec_logical))
-char_avg <- mean(pull(example_df, vec_char))
+n_avg <- mean(
+  pull(example_df, vec_num)
+  )
+log_avg <- mean(
+  pull(example_df, vec_logical)
+  )
+char_avg <- mean(
+  pull(example_df, vec_char)
+  )
 ```
 
     ## Warning in mean.default(pull(example_df, vec_char)): argument is not numeric or
     ## logical: returning NA
 
 ``` r
-fac_avg <- mean(pull(example_df, vec_factor))
+fac_avg <- mean(
+  pull(example_df, vec_factor)
+  )
 ```
 
     ## Warning in mean.default(pull(example_df, vec_factor)): argument is not numeric
@@ -97,14 +106,23 @@ representing the arithmetic mean. The mean of the logical variable
 `vec_logical` outputs 0.3, representing the average number of `TRUE`
 values (under the hood, `TRUE == 1`). The mean of the character variable
 `vec_char` and the factor variable `vec_factor` output NA and NA,
-respectively.
+respectively, since there are no numeric values or numeric equivalents
+to compute.
+
+## Converting Variable Types
 
 We can convert non-numeric variables to numeric variables.
 
 ``` r
-vec_log_num <- as.numeric(pull(example_df, vec_logical))
-vec_char_num <- as.numeric(pull(example_df, vec_char))
-vec_factor_num <- as.numeric(pull(example_df, vec_factor))
+vec_log_num <- as.numeric(
+  pull(example_df, vec_logical)
+  )
+vec_char_num <- as.numeric(
+  pull(example_df, vec_char)
+  )
+vec_factor_num <- as.numeric(
+  pull(example_df, vec_factor)
+  )
 ```
 
 - Converting Logical to Numeric: Explicitly converts `TRUE` to 1 and
@@ -112,10 +130,10 @@ vec_factor_num <- as.numeric(pull(example_df, vec_factor))
 - Converting Character to Numeric: Each character value is converted to
   `NA`.
 - Converting Factor to Numeric: Each factor value is converted to either
-  1, 2, or 3, which represents the three factor levels we previously
+  1, 2, or 3, which represent the three factor levels we previously
   defined.
 
-Now, we can take the mean of each of our converted variables.
+Now, let’s try to take the mean of each of our converted variables.
 
 ``` r
 mean(vec_log_num)
@@ -135,8 +153,8 @@ mean(vec_factor_num)
 
     ## [1] 2.2
 
-As previously described, the output for the mean `vec_log_num`
-represents the average number of `TRUE` values. Output for
+As previously described, output for the mean of `vec_log_num` represents
+the average number of `TRUE` values. Output for the mean of
 `vec_char_num` remains `NA` as there are no numerical values that
-correspond to the NA values. Output for the mean of `vec_factor_num` now
-represents the average value of the factor levels.
+correspond to the `NA` values. Output for the mean of `vec_factor_num`
+now represents the average value of the factor levels.
